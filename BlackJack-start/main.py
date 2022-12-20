@@ -1,4 +1,4 @@
-import random\
+import random
 
 List = [11, 2, 3, 4, 5, 6 ,7, 8 ,9, 10, 10, 10, 10]
 
@@ -6,6 +6,7 @@ my_card = []
 computer = []
 repeat = True
 num2 = 0
+num3 = 0
 
 # get computer close to 21 function
 def get_computerTo21():
@@ -43,26 +44,26 @@ def check_the_Answer(list1, list2, option):
             print(f"   Your final hand: {list1}, final score: {sum(list1)}")
             print(f"   Computer's final hand: {list2}, final score: {sum(list2)}")
             print("You went over. You lose")
-            repeat = False
-            
+            return 1
     elif option == 2:
         if sum(list1) > 21:
             print(f"   Your final hand: {list1}, final score: {sum(list1)}")
             print(f"   Computer's final hand: {list2}, final score: {sum(list2)}")
             print("You went over. You lose")
-            repeat = False
+            return False
         elif sum(list1) < sum(list2):
             print(f"   Your final hand: {list1}, final score: {sum(list1)}")
             print(f"   Computer's final hand: {list2}, final score: {sum(list2)}")
             print("You lose")
-            repeat = False
+            return False
         elif sum(list1) <= 21:
             if sum(list1) == sum(list2):
                 print("Draw")
-                repeat = False
+                return False
             else:
                 print("You win")
-                repeat = False
+                return False
+
 
 
 #get 2 sets of 2 randome cards
@@ -74,7 +75,7 @@ print(my_card, computer)
 
 
 print(f"   Your cards: {my_card}, current score: {sum(my_card)}")
-print|(f"   Computer's first card: {computer[0]}")
+print(f"   Computer's first card: {computer[0]}")
 Continue = input("Type 'y' to get another card, type 'n' to pass:")
 
 if Continue == "y":
@@ -83,8 +84,17 @@ if Continue == "y":
         get_11_to_1()
         print(f"   Your cards: {my_card}, current score: {sum(my_card)}")
         print(f"   Computer's first card: {computer[0]}")
-        check_the_Answer(my_card, computer, 1)
+        num3 = check_the_Answer(my_card, computer, 1)
+        if num3 == 1:
+            break
         Continue1 = input("Type 'y' to get another card, type 'n' to pass:")
         if Continue1 == "n":
-            check_the_Answer(my_card, computer, 2)
+            get_computerTo21()
+            repeat = check_the_Answer(my_card, computer, 2)
+elif Continue == "n":
+    get_computerTo21()
+    check_the_Answer(my_card, computer, 2)
 
+
+my_card = []
+computer = []
