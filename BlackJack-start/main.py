@@ -44,6 +44,7 @@ def check_the_Answer(list1, list2, option):
             print(f"   Computer's final hand: {list2}, final score: {sum(list2)}")
             print("You went over. You lose")
             repeat = False
+            
     elif option == 2:
         if sum(list1) > 21:
             print(f"   Your final hand: {list1}, final score: {sum(list1)}")
@@ -55,6 +56,13 @@ def check_the_Answer(list1, list2, option):
             print(f"   Computer's final hand: {list2}, final score: {sum(list2)}")
             print("You lose")
             repeat = False
+        elif sum(list1) <= 21:
+            if sum(list1) == sum(list2):
+                print("Draw")
+                repeat = False
+            else:
+                print("You win")
+                repeat = False
 
 
 #get 2 sets of 2 randome cards
@@ -72,6 +80,11 @@ Continue = input("Type 'y' to get another card, type 'n' to pass:")
 if Continue == "y":
     while repeat == True:
         my_card.append(random.choice(List))
+        get_11_to_1()
         print(f"   Your cards: {my_card}, current score: {sum(my_card)}")
-        print|(f"   Computer's first card: {computer[0]}")
-        
+        print(f"   Computer's first card: {computer[0]}")
+        check_the_Answer(my_card, computer, 1)
+        Continue1 = input("Type 'y' to get another card, type 'n' to pass:")
+        if Continue1 == "n":
+            check_the_Answer(my_card, computer, 2)
+
