@@ -1,0 +1,1 @@
+STARTING_POSITIONS = [(0, 0), (-20, 0)]
