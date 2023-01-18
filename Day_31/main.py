@@ -1,5 +1,5 @@
 from tkinter import *
-# ---------------------------- CONSTANTS ------------------------------- #
+# ---------------------------- CONSTANTS ------------------------------- #z
 PINK = "#e2979c"
 RED = "#e7305b"
 GREEN = "#9bdeac"
@@ -19,6 +19,8 @@ LONG_BREAK_MIN = 35
 window = Tk()
 window.title("pomodoro")
 window.config(padx=100, pady=50, bg=YELLOW)
+
+title_label = Label()
 
 canvas = Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
 tomato_img = PhotoImage(file="tomato.png")
