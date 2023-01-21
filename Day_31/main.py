@@ -10,6 +10,7 @@ FONT_NAME = "Courier"
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 35
+reps = 0
 
 # ---------------------------- TIMER RESET ------------------------------- #
 
@@ -22,9 +23,19 @@ def reset_timer():
 
 def start_timer():
     global reps
-    work_sed = 
-    count_down(5*60)
-
+    reps += 1
+    work_sec = WORK_MIN*60
+    short_brake_sec = SHORT_BREAK_MIN*60
+    long_break_sec = LONG_BREAK_MIN*60
+    if reps % 8 == 0:
+        count_down(long_break_sec)
+        title_label.config(text="Long Break", fg=RED)
+    elif reps % 2 == 0:
+        count_down(short_brake_sec)
+        title_label.config(text="Short Break", fg=PINK)
+    else:
+        count_down(work_sec)
+        title_label.config(text="Work", fg=GREEN)
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 
@@ -39,7 +50,8 @@ def count_down(count):
     if count > 0:
         print(count)
         window.after(1000, count_down, count-1)
-
+    else:
+        start_timer()
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
