@@ -21,6 +21,8 @@ def reset_timer():
 
 
 def start_timer():
+    global reps
+    work_sed = 
     count_down(5*60)
 
 
