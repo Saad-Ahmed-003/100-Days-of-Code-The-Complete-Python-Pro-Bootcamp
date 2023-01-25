@@ -31,7 +31,7 @@ password_entry = Entry(width=21)
 password_entry.grid(row=3, column=1)
 
 # Buttons
-genrate_apssword_button = B
+generate_password_button = Button(text=)
 
 
 window.mainloop()
