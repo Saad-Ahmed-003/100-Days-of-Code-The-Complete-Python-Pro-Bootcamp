@@ -41,9 +41,10 @@ def save():
         is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: \nEmail: {email} "
                                                       f"\nPassword: {password} \nIs it ok to save?")
         if is_ok:
-            with open("data.json", "a") as data_file:
-                # json.dump(new_data, data_file, indent=4)
-                
+            with open("data.json", "r") as data_file:
+                data = json.load(data_file)
+                data.update(new_data)
+                json.dump(data, data_file, indent=4)
                 website_entry.delete(0, END)
                 password_entry.delete(0, END)
 
