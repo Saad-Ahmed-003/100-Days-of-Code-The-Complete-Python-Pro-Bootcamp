@@ -71,13 +71,15 @@ def find_password():
             data = json.load(data_file)
     except FileNotFoundError:
         messagebox.showinfo(title=website, message="File not found!")
-            if website in data:
-                email = data[website]["email"]
-                password = data[website]["password"]
-                messagebox.showinfo(title=website, message=f"Email: {email}\nPassword: {password}")
-                password_entry.insert(0, password)
-                pyperclip.copy(password)
-
+    else:
+        if website in data:
+            email = data[website]["email"]
+            password = data[website]["password"]
+            messagebox.showinfo(title=website, message=f"Email: {email}\nPassword: {password}")
+            password_entry.insert(0, password)
+            pyperclip.copy(password)
+        else:
+            messagebox.showinfo(title="Error", message=f"No details for {website} exists!")
 
 
 # ---------------------------- UI SETUP ------------------------------- #
