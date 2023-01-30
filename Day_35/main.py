@@ -20,5 +20,5 @@ if weekday == 0:
                             to_addrs=my_Email,
                             msg=f"Subject:Monday Motivation\n\n"
                                 f"{quote}")
- 
+
 
