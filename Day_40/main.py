@@ -16,8 +16,10 @@ dict_1 = response.json()
 # STEP 1: Use https://www.alphavantage.co/documentation/#daily
 # When stock price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
 
-closing_stock_price = dict_1["Time Series (Daily)"][str(yesterday)]["4. close"]
-closing_stock_price2_0 = dict_1["Time Series (Daily)"][str(yesterday2_0)]["4. close"]
+closing_stock_price = \
+    dict_1["Time Series (Daily)"][str(yesterday)]["4. close"]
+closing_stock_price2_0 = \
+    dict_1["Time Series (Daily)"][str(yesterday2_0)]["4. close"]
 
 # TODO 3. - Find the positive difference between 1 and 2. e.g. 40 - 20 = -20, but the positive difference is 20.
 #  Hint: https://www.w3schools.com/python/ref_func_abs.asp
@@ -25,7 +27,7 @@ closing_stock_price2_0 = dict_1["Time Series (Daily)"][str(yesterday2_0)]["4. cl
 
 print(closing_stock_price2_0, closing_stock_price)
 
-positive_dif = float(closing_stock_price2_0) - float(closing_stock_price)
+positive_dif = abs(float(closing_stock_price2_0) - float(closing_stock_price))
 
 print("{:.4f}".format(positive_dif))
 
