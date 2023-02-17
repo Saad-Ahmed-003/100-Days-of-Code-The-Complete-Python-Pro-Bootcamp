@@ -4,8 +4,8 @@ from twilio.rest import Client
 from datetime import date, timedelta
 
 
-account_sid = "AC2e309bccc7a8232680137162fdd8b55e"
-auth_token = os.environ["eae6d51f02535de1718f0b8268906ab9"]
+account_sid = "ACbc0336a8d10cee31665e245979c35eaf"
+auth_token = os.environ["ba5d9a0a9419218a6092a29e716959f0"]
 client = Client(
     account_sid,
     auth_token
@@ -98,24 +98,4 @@ if percentage > 5.0:
     for i in range(3):
         print(f'Title: {dict_2["articles"][i]["title"]}')
         print(f'description: {dict_2["articles"][i]["description"]}')
-
-
-# TODO 9. - Send each article as a separate message via Twilio.
-
-
-# Optional
-# TODO: Format the message like this:
-"""
-TESLA: 🔺2%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TESLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file
- by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the
-  coronavirus market crash.
-or
-"TESLA: 🔻5%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TESLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file
- by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the 
- coronavirus market crash.
-"""
 
