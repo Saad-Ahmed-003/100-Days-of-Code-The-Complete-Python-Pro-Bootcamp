@@ -17,7 +17,7 @@ def is_iss_overhead():
     iss_latitude = float(data["iss_position"]["latitude"])
     iss_longitude = float(data["iss_position"]["longitude"])
 
-    #Your position is within +5 or -5 degrees of the iss position.
+    # Your position is within +5 or -5 degrees of the iss position.
     if MY_LAT-5 <= iss_latitude <= MY_LAT+5 and MY_LONG-5 <= iss_longitude <= MY_LONG+5:
         return True
 
@@ -43,7 +43,7 @@ def is_night():
 while True:
     time.sleep(60)
     if is_iss_overhead() and is_night():
-        connection = smtplib.SMTP("__YOUR_SMTP_ADDRESS_HERE___")
+        connection = smtplib.SMTP("smtp.gmail.com")
         connection.starttls()
         connection.login(MY_EMAIL, MY_PASSWORD)
         connection.sendmail(

@@ -1,15 +1,9 @@
-import os
+import smtplib
 import requests
-from twilio.rest import Client
 from datetime import date, timedelta
 
 
-account_sid = "ACbc0336a8d10cee31665e245979c35eaf"
-auth_token = os.environ["ba5d9a0a9419218a6092a29e716959f0"]
-client = Client(
-    account_sid,
-    auth_token
-)
+connection = smtplib.SMTP()
 
 
 STOCK_NAME = "TESLA"
