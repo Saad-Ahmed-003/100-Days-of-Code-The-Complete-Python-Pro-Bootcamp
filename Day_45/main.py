@@ -1,9 +1,12 @@
 from bs4 import BeautifulSoup
-# import lxml
+import requests
 
-with open("website.html") as file:
-    content = file.read()
-    print(content)
-    soup = BeautifulSoup(content, "html.parser")
-    print(soup.title.string)
-print(content)
+response = requests.get(url="https://news.ycombinator.com/newest")
+
+yc_web_page = response.text
+
+soup = BeautifulSoup(yc_web_page, "html.parser")
+
+article_tag = soup.find(name="span", class_="titleline")
+
+print(article_tag)
