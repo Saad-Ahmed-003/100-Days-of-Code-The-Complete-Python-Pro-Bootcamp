@@ -4,7 +4,7 @@ import json
 
 
 def post_data(date1, time1, exercise, duration, calories):
-    url2 = "https://api.sheety.co/7fda9457fd9c8184947c825a52944bf6/myWorkouts/workouts"
+    url2 =
     post_data = {
         'workout': {
             'date': date1,
