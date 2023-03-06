@@ -13,6 +13,15 @@ driver.get("http://www.python.org")
 content1 = driver.find_elements(By.CSS_SELECTOR, ".event-widget ul.menu li time")
 content2 = driver.find_elements(By.CSS_SELECTOR, ".event-widget ul.menu li a")
 
-for i in content2:
-    print(i.text)
+# for i in range(len(list1)):
+#     print(i)
+#     dictionary[i] = {"name": list2[i], "time": list1[i]}
+
+for i in range(len(content1)):
+    print(i)
+    dictionary[i] = {"time": str(content1[i].text), "name": str(content2[i].text)}
+
+print(dictionary)
+
+
 
