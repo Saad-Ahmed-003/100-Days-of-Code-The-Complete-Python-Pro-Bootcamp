@@ -1,25 +1,44 @@
 from bs4 import BeautifulSoup
 import requests
-import lxml
+import spotipy
+from spotipy.oauth2 import SpotifyOAuth
 
-url = "https://www.amazon.in/gp/product/B0B5V8NT52/ref=ox_sc_act_title_1?smid=A14CZOWI0VEHLG&psc=1"
-header = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/'
-                  '110.0.0.0 Safari/537.36',
-    'Accept-Language': 'en-US,en;q=0.9,hi-IN;q=0.8,hi;q=0.7'
-}
+# Scraping Billboard 100
+date = input("Which year do you want to travel to? Type the date in this format YYYY-MM-DD: ")
+response = requests.get("https://www.billboard.com/charts/hot-100/" + date)
+soup = BeautifulSoup(response.text, 'html.parser')
+song_names_spans = soup.find_all("span", class_="chart-element__information__song")
+song_names = [song.getText() for song in song_names_spans]
 
-response = requests.get(url=url, headers=header)
-page = response.text
-soup = BeautifulSoup(page, "lxml")
+#Spotify Authentication
+sp = spotipy.Spotify(
+    auth_manager=SpotifyOAuth(
+        scope="playlist-modify-private",
+        redirect_uri="http://example.com",
+        client_id="YOUR CLIENT ID",
+        client_secret="YOUR CLIENT SECRET",
+        show_dialog=True,
+        cache_path="token.txt"
+    )
+)
+user_id = sp.current_user()["id"]
+print(user_id)
 
-price_text = soup.find(name="span", class_="a-price-whole")
-price = price_text.get_text()
+#Searching Spotify for songs by title
+song_uris = []
+year = date.split("-")[0]
+for song in song_names:
+    result = sp.search(q=f"track:{song} year:{year}", type="track")
+    print(result)
+    try:
+        uri = result["tracks"]["items"][0]["uri"]
+        song_uris.append(uri)
+    except IndexError:
+        print(f"{song} doesn't exist in Spotify. Skipped.")
 
-price_first = price.split(".")[0]
-price_second = int(price_first.replace(",", ""))
+#Creating a new private playlist in Spotify
+playlist = sp.user_playlist_create(user=user_id, name=f"{date} Billboard 100", public=False)
+print(playlist)
 
-print(price_first, price_second)
-
-
-
+#Adding songs found into the new playlist
+sp.playlist_add_items(playlist_id=playlist["id"], items=song_uris)
