@@ -1,57 +1,60 @@
-from time import sleep
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import ElementClickInterceptedException, NoSuchElementException
+from time import sleep
 
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_experimental_option('geolocation', True)
+FB_EMAIL = YOUR FACEBOOK LOGIN EMAIL
+FB_PASSWORD = YOUR FACEBOOK PASSWORD
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+chrome_driver_path = YOUR CHROME DRIVER PATH
+driver = webdriver.Chrome(executable_path=chrome_driver_path)
 
-driver.get("https://tinder.com")
+driver.get("http://www.tinder.com")
 
 sleep(2)
+login_button = driver.find_element_by_xpath('//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/header/div[1]/div[2]/div/button')
+login_button.click()
 
-permission_1 = driver.find_element(By.XPATH, '//*[@id="o1400699221"]/div/div[2]/div/div/div[1]/div[1]/button')
-permission_1.click()
+sleep(2)
+fb_login = driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[1]/div/div[3]/span/div[2]/button')
+fb_login.click()
 
-log_in = driver.find_element(By.XPATH, '//*[@id="o1400699221"]/div/div[1]/div/main/div[1]/div/div/div/div/header/'
-                                       'div/div[2]/div[2]/a')
-log_in.click()
-
-sleep(4)
-
-fb_button = driver.find_element(By.XPATH, '//*[@id="o1622039657"]/main/div/div/div[1]/div/div/div[3]/span/div[2]/button')
-fb_button.click()
-
-sleep(3)
-
+sleep(2)
 base_window = driver.window_handles[0]
 fb_login_window = driver.window_handles[1]
 driver.switch_to.window(fb_login_window)
 print(driver.title)
 
-output_number = driver.find_element(By.ID, "email")
-output_number.send_keys("9665539971")
+email = driver.find_element_by_xpath('//*[@id="email"]')
+password = driver.find_element_by_xpath('//*[@id="pass"]')
 
-sleep(2)
-
-output_password = driver.find_element(By.ID, "pass")
-output_password.send_keys("saadbeta@212")
-output_password.send_keys(Keys.ENTER)
-
-sleep(3.5)
+email.send_keys(FB_EMAIL)
+password.send_keys(FB_PASSWORD)
+password.send_keys(Keys.ENTER)
 
 driver.switch_to.window(base_window)
+print(driver.title)
 
-sleep(15)
+sleep(5)
+allow_location_button = driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div/div/div[3]/button[1]')
+allow_location_button.click()
+notifications_button = driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div/div/div[3]/button[2]')
+notifications_button.click()
+cookies = driver.find_element_by_xpath('//*[@id="content"]/div/div[2]/div/div/div[1]/button')
+cookies.click()
 
+for n in range(100):
+    sleep(1)
+    try:
+        print("called")
+        like_button = driver.find_element_by_xpath(
+            '//*[@id="content"]/div/div[1]/div/main/div[1]/div/div/div[1]/div/div[2]/div[4]/button')
+        like_button.click()
+    except ElementClickInterceptedException:
+        try:
+            match_popup = driver.find_element_by_css_selector(".itsAMatch a")
+            match_popup.click()
+        except NoSuchElementException:
+            sleep(2)
 
-sleep(10)
-age = driver.find_element(By.XPATH, '//*[@id="o1400699221"]/div/div[1]/div/main/div[1]/div/div/div[1]/div[1]/'
-                                    'div/div[2]/div[3]/div/div[1]/div/span[2]')
-
-print(age.text)
-
+driver.quit()
