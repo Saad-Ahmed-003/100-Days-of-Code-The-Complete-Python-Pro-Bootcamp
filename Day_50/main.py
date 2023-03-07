@@ -46,13 +46,12 @@ sleep(3.5)
 
 driver.switch_to.window(base_window)
 
-sleep(7)
-
-permission_2 = driver.find_element(By.XPATH, '//*[@id="o1622039657"]/main/div/div/div/div[3]/button[1]')
+sleep(15)
 
 
-# age = driver.find_element(By.XPATH, '//*[@id="o1400699221"]/div/div[1]/div/main/div[1]/div/div/div[1]/div[1]/'
-#                                     'div/div[2]/div[3]/div/div[1]/div/span[2]')
+sleep(10)
+age = driver.find_element(By.XPATH, '//*[@id="o1400699221"]/div/div[1]/div/main/div[1]/div/div/div[1]/div[1]/'
+                                    'div/div[2]/div[3]/div/div[1]/div/span[2]')
 
-# print(age.text)
+print(age.text)
 
