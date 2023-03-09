@@ -1,4 +1,4 @@
-import time
+from time import sleep
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -10,7 +10,9 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
 driver.get("http://www.python.org")
 
-content1 = driver.find_elements(By.CLASS_NAME, ".event-widget ul.menu li time")
+sleep(3)
+
+content1 = driver.find_elements(By.CLASS_NAME, ".event-widget div.shrubbery ul.menu li time")
 content2 = driver.find_elements(By.CSS_SELECTOR, ".event-widget ul.menu li a")
 
 # for i in range(len(list1)):
