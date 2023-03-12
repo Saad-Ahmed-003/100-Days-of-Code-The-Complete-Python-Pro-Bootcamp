@@ -13,5 +13,10 @@ def home(user):
     return render_template("index.html", name=user.capitalize(), gender=gender1, age=age1)
 
 
+@app.route('/blog')
+def blog():
+    response = requests.get(url=)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
