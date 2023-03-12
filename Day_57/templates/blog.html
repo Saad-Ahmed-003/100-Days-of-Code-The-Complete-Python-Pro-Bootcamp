@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>blog page</title>
+</head>
+<body>
+    {% for i in posts: %}
+        <h1>{{ i["title"] }}</h1>
+        <h2>{{ i["subtitle"] }}</h2>
+    {% endfor %}
+</body>
+</html>
