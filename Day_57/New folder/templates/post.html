@@ -13,8 +13,12 @@
            </div>
         <div class="content">
             <div class="card">
-                <h2>Title</h2>
-                <p>Post Body</p>
+                {% for i in posts: %}
+                    {% if i["id"] == id %}
+                    <h2>{{ i["title"] }}</h2>
+                    <p>{{ i["body"] }}</p>
+                    {% endif %}
+                {% endfor %}
             </div>
 
     </div>
