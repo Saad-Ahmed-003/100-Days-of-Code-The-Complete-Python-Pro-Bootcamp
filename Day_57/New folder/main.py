@@ -11,7 +11,9 @@ def home():
     all_posts = response.json()
     return render_template("index.html", posts=all_posts)
 
-
+@app.route('1')
+def post():
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
