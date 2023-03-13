@@ -14,19 +14,23 @@
     <div class="content">
         <div class="card">
             {% for i in posts: %}
-                {% if i["id"] == 1 %}
+                {% if i["id"] ==1 %}
                 <h2>{{ i["title"] }}</h2>
                 <p class="text">{{ i["subtitle"] }}</p>
-                <a href="{{}}">Read</a>
+                <a href="{{ url_for('post', id_num=1)}}">Read</a>
                 {% endif %}
             {% endfor %}
         </div>
     </div>
     <div class="content">
         <div class="card">
-            <h2>Another blog post</h2>
-            <p class="text">Lorem ipsum dolor sit </p>
-            <a href="#">Read</a>
+        {% for i in posts: %}
+                {% if i["id"] ==2 %}
+                <h2>{{ i["title"] }}</h2>
+                <p class="text">{{ i["subtitle"] }}</p>
+                <a href="{{ url_for('post', id_num=2)}}">Read</a>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 </div>
